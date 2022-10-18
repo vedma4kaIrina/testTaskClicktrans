@@ -131,7 +131,7 @@ function App() {
                 if (values.priceNettoEUR)  {                        
                 const numEdit = values.priceNettoEUR.replace(',', '.');     
                 if (Number(numEdit)) 
-                  setFieldValue('priceBruttoEUR', numEdit * ev.target.value / 100 )
+                  setFieldValue('priceBruttoEUR', numEdit - (numEdit * values.vat / 100))
                 else 
                   setFieldValue('priceBruttoEUR', '' )
                 } 
@@ -157,7 +157,7 @@ function App() {
                 setPriceNettoEURFocus(true);                
                 const numEdit = ev.target.value.replace(',', '.');         
                 if (Number(numEdit)) 
-                  setFieldValue('priceBruttoEUR', numEdit * values.vat / 100 )
+                  setFieldValue('priceBruttoEUR', numEdit - (numEdit * values.vat / 100))
                 else 
                   setFieldValue('priceBruttoEUR', '' )
                 
@@ -175,7 +175,10 @@ function App() {
               value={values.priceBruttoEUR}             
             />
             </div>
-            <button type="submit">Submit</button>
+
+            <div className='form_block'>
+              <button type="submit">Submit</button>
+            </div>
 
           </form>
         )}
